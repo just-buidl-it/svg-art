@@ -1,0 +1,39 @@
+{
+  "name": "@just-buidl-it/svg-art",
+  "version": "0.0.1",
+  "private": false, 
+  "main": "dist/index.js",
+  "author": "coreyar",
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/just-buidl-it/svg-art"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "peerDependencies": {
+    "paper": "^0.12.17",
+    "paper-jsdom-canvas": "^0.12.17"
+  },
+  "devDependencies": {
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/npm": "^11.0.0",
+    "@types/node": "^20.8.9",
+    "conventional-changelog-conventionalcommits": "^7.0.2",
+    "semantic-release": "^22.0.6",
+    "tsx": "^3.14.0",
+    "typescript": "^5.2.2"
+  },
+  "peerDependenciesMeta": {
+    "paper-jsdom": {
+      "optional": true
+    },
+    "paper-jsdom-canvas": {
+      "optional": true
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}

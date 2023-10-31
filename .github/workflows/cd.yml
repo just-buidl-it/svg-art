@@ -1,0 +1,38 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-node@v2
+        with:
+          cache: "yarn"
+
+      - name: Install dependencies
+        # Hack to get around failing "ethereumjs-abi The remote archive doesn't match the expected checksum" error
+        run: YARN_CHECKSUM_BEHAVIOR=update yarn
+      
+      - name: Build
+        run: yarn add paper
+
+      - name: Build
+        run: yarn build
+
+      - name: Release
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: yarn semantic-release
