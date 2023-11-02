@@ -1,9 +1,9 @@
-import Paper, { Path, Point, Size } from 'paper'
+import type Paper from 'paper';
 
-const createBrick = (x: number, y: number, w: number, h: number, strokeColor: string, fillColor: string) => {
-  const topLeft = new Point(x, y);
-  const rectSize = new Size(w, h);
-  const brick = new Path.Rectangle(topLeft, rectSize);
+const createBrick = (paper: typeof Paper,x: number, y: number, w: number, h: number, strokeColor: string, fillColor: string) => {
+  const topLeft = new paper.Point(x, y);
+  const rectSize = new paper.Size(w, h);
+  const brick = new paper.Path.Rectangle(topLeft, rectSize);
   // @ts-expect-error string is valid here
   brick.strokeColor = strokeColor;
   // @ts-expect-error string is valid here
@@ -19,8 +19,7 @@ interface BrickWallConfig {
   fillColor: string
 }
 
-const createBrickWall = async ({ brickHeight, brickWidth, wallHeight, wallWidth, strokeColor, fillColor }: BrickWallConfig) => {
-  Paper.setup(new Paper.Size(wallWidth, wallHeight));
+const createBrickWall = async (paper: typeof Paper, { brickHeight, brickWidth, wallHeight, wallWidth, strokeColor, fillColor }: BrickWallConfig) => {
   let x = 0;
   let y = 0;
 
@@ -31,13 +30,13 @@ const createBrickWall = async ({ brickHeight, brickWidth, wallHeight, wallWidth,
       if ((y / brickHeight) % 2 == 1 && x == 0) {
         width = brickWidth / 2
       }
-      createBrick(x, y, brickWidth, brickHeight, strokeColor, fillColor)
+      createBrick(paper, x, y, brickWidth, brickHeight, strokeColor, fillColor)
 
       x += width;
     }
     // Create an extra brick if we are on an odd row
     if ((y / brickHeight) % 2 == 1) {
-      createBrick(x, y, brickWidth / 2, brickHeight, strokeColor, fillColor)
+      createBrick(paper, x, y, brickWidth / 2, brickHeight, strokeColor, fillColor)
     }
 
     x = 0;
