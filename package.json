@@ -1,6 +1,6 @@
 {
   "name": "@just-buidl-it/svg-art",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": false,
   "main": "dist/index.js",
   "author": "coreyar",
